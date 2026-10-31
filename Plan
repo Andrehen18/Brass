@@ -1,0 +1,727 @@
+PROMPT MESTRE — PLATAFORMA SAAS COMPLETA PARA O ECOSSISTEMA CERVEJEIRO
+
+1. PAPEL E MISSÃO
+
+Atue como uma equipe multidisciplinar sênior de desenvolvimento de software, arquitetura de sistemas, engenharia de dados, segurança da informação, UX/UI, gestão industrial cervejeira, comércio eletrônico, CRM, ERP e negócios SaaS.
+
+Sua missão é projetar, desenvolver, testar, documentar, implantar e preparar para comercialização uma plataforma web completa para o ecossistema cervejeiro.
+
+A plataforma deverá atender desde cervejeiros caseiros e iniciantes até microcervejarias, pequenas e médias cervejarias, operações de maior porte, distribuidores, fabricantes e revendedores de insumos e equipamentos.
+
+O sistema deverá ser modular, escalável, seguro, responsivo, multiempresa e preparado para receber novos módulos sem exigir reconstruções da arquitetura existente.
+
+Não entregue somente ideias, protótipos visuais, telas estáticas, exemplos isolados ou documentação conceitual. Construa uma aplicação real, com banco de dados persistente, autenticação, regras de negócio, operações CRUD completas, validações, permissões, testes e implantação funcional.
+
+Trabalhe de forma incremental, mantendo o projeto executável ao final de cada etapa.
+
+2. OBJETIVO DO NEGÓCIO
+
+Criar uma plataforma SaaS de gestão cervejeira e integração comercial que concentre as principais operações do negócio em um único ambiente.
+
+A plataforma deverá:
+
+- Resolver problemas reais de produção, gestão, qualidade, estoque, vendas e rentabilidade.
+- Ajudar o cervejeiro caseiro a evoluir para uma operação profissional.
+- Reduzir perdas de matérias-primas, falhas de produção, retrabalho e desperdícios.
+- Melhorar a rastreabilidade dos lotes e o controle de qualidade.
+- Oferecer um CRM especializado no mercado cervejeiro.
+- Integrar fabricantes, fornecedores, distribuidores, revendedores e cervejarias.
+- Gerar indicadores confiáveis para decisões operacionais e financeiras.
+- Criar oportunidades de receita recorrente por assinatura.
+- Permitir a comercialização de módulos individuais ou pacotes integrados.
+- Preparar a arquitetura para grandes operações, integrações externas e automações industriais.
+
+Considere inicialmente o mercado brasileiro, com idioma português do Brasil, moeda BRL, sistema métrico, datas no padrão brasileiro e suporte à legislação brasileira aplicável.
+
+Prepare a internacionalização futura sem complicar desnecessariamente a primeira versão.
+
+3. REGRAS FUNDAMENTAIS DE DESENVOLVIMENTO
+
+1. Antes de programar, examine o repositório, os arquivos, as ferramentas disponíveis e o estado atual do projeto.
+2. Se o projeto estiver vazio, inicialize uma estrutura profissional. Se já existir, preserve o que estiver funcionando e evite reescritas desnecessárias.
+3. Produza um plano técnico e um backlog priorizado, mas não pare na fase de planejamento.
+4. Desenvolva um MVP funcional e evolua por etapas.
+5. Não crie botões decorativos, formulários sem persistência ou funcionalidades que apenas simulem operações reais.
+6. Não declare um recurso concluído sem implementar e verificar seu comportamento.
+7. Não invente resultados de testes, integrações, dados de produção ou implantações.
+8. Utilize dados demonstrativos claramente identificados, separados dos dados reais.
+9. Escolha tecnologias estáveis, amplamente documentadas e com manutenção ativa.
+10. Prefira soluções gratuitas, de código aberto ou com planos gratuitos adequados ao desenvolvimento inicial.
+11. Antes de adotar qualquer serviço, verifique seus limites, condições de uso comercial, requisitos de pagamento e possibilidade de migração.
+12. Não exponha chaves, senhas, tokens ou credenciais.
+13. Quando uma decisão importante estiver em aberto, proponha a opção mais simples e segura, explique a escolha e prossiga sem bloquear desnecessariamente o desenvolvimento.
+14. Mantenha um arquivo de progresso atualizado com funcionalidades concluídas, pendências, erros conhecidos e próximos passos.
+15. Não tente implementar todos os módulos simultaneamente. Priorize os fluxos que geram valor real para os primeiros clientes.
+
+4. ARQUITETURA E TECNOLOGIAS
+
+Adote inicialmente a seguinte stack, validando a compatibilidade das versões antes da instalação.
+
+Desenvolvimento e versionamento
+
+- GitHub para repositório, histórico de alterações, issues e pull requests.
+- GitHub Codespaces como ambiente de desenvolvimento em nuvem, quando conveniente.
+- Visual Studio Code como alternativa local.
+- Git para controle de versão.
+- GitHub Actions para automações de integração contínua, quando disponível na cota escolhida.
+
+Aplicação web
+
+- Next.js com App Router.
+- React e TypeScript em modo estrito.
+- Tailwind CSS.
+- Uma biblioteca de componentes acessíveis, como shadcn/ui.
+- Biblioteca de gráficos compatível com React.
+- React Hook Form e Zod para formulários e validações, quando apropriados.
+- PWA para melhorar a experiência em dispositivos móveis, quando viável.
+
+Backend e banco de dados
+
+- Supabase.
+- PostgreSQL como banco relacional principal.
+- Supabase Auth para autenticação.
+- Row Level Security (RLS) para isolamento de dados.
+- Supabase Storage para arquivos e documentos.
+- SQL versionado e migrações reproduzíveis.
+- Funções no servidor para operações sensíveis.
+- Edge Functions ou serviços externos quando realmente necessários.
+
+Hospedagem e serviços complementares
+
+- Vercel ou alternativa compatível para implantação do frontend e das funções suportadas.
+- Serviço transacional de e-mail com camada gratuita ou alternativa econômica.
+- Provedor de pagamentos compatível com o Brasil, como Mercado Pago ou Stripe, após validar disponibilidade, taxas e requisitos.
+- Serviço de monitoramento de erros com plano gratuito, se disponível.
+- Serviço de mapas, assinatura eletrônica, mensageria ou integração fiscal somente quando houver necessidade concreta.
+
+Não dependa de um único fornecedor para toda a lógica de negócio. Isole integrações por interfaces e adaptadores, para permitir substituições futuras.
+
+Considere que o Codespaces é um ambiente de desenvolvimento, não a hospedagem de produção. Mantenha o projeto executável também em ambiente local.
+
+5. ARQUITETURA MODULAR
+
+Organize a aplicação em módulos de domínio bem definidos, compartilhando identidade, permissões, infraestrutura e componentes visuais.
+
+Estruture o código para permitir evolução futura, sem introduzir microserviços prematuramente.
+
+Crie módulos independentes para:
+
+1. Identidade, usuários e organizações.
+2. Planos, assinaturas e controle de acesso.
+3. Cervejeiro caseiro e receitas.
+4. Produção, brassagem e fermentação.
+5. Estoque, compras e fornecedores.
+6. Qualidade e rastreabilidade.
+7. CRM e vendas.
+8. Financeiro e custos.
+9. Distribuição e revenda.
+10. Marketplace e catálogo comercial.
+11. Relatórios e indicadores.
+12. Administração da plataforma.
+13. Integrações e automações.
+14. Recursos avançados para operações de maior porte.
+
+Cada módulo deverá ter limites claros, serviços de negócio, validações, permissões, testes e documentação.
+
+Evite dependências circulares. Crie contratos internos estáveis e registre alterações de esquema e APIs.
+
+6. MULTIEMPRESA E CONTROLE DE ACESSO
+
+A plataforma deverá permitir que uma pessoa pertença a uma ou mais organizações, com funções diferentes em cada organização.
+
+Implemente:
+
+- Cadastro de usuário e organização.
+- Tipos de organização: cervejeiro individual, cervejaria, distribuidor, revendedor, fabricante e administrador da plataforma.
+- Convites para integrantes.
+- Papéis e permissões configuráveis.
+- Proprietário, administrador, gestor, operador, vendedor, responsável pela qualidade, financeiro e visualizador.
+- Isolamento rigoroso dos dados de cada organização.
+- Permissões por módulo e operação.
+- Controle de acesso no servidor e no banco de dados.
+- Registro de eventos críticos e alterações importantes.
+- Desativação de usuários e revogação de acessos.
+
+Não confie apenas em menus ocultos ou verificações no frontend. Toda autorização deverá ser validada no backend e, quando aplicável, pelo RLS do PostgreSQL.
+
+Crie testes que comprovem que usuários de uma empresa não conseguem consultar ou alterar dados de outra empresa, inclusive por requisições diretas à API.
+
+7. MÓDULO DO CERVEJEIRO CASEIRO
+
+Desenvolva uma experiência simples, educativa e funcional.
+
+Funcionalidades:
+
+- Perfil do cervejeiro.
+- Equipamentos e capacidade de produção.
+- Cadastro e edição de receitas.
+- Estilos cervejeiros e parâmetros de referência.
+- Ingredientes e quantidades.
+- Maltes, lúpulos, leveduras, adjuntos e água.
+- Cálculo de quantidade de ingredientes.
+- Conversão de volume e unidades.
+- Estimativas de OG, FG, ABV, IBU, cor e eficiência.
+- Registro de brassagem.
+- Cronograma de mostura, fervura e adições.
+- Diário de fermentação.
+- Registro de temperatura, densidade e medições.
+- Maturação, envase e carbonatação.
+- Histórico de versões da receita.
+- Avaliação sensorial.
+- Custo estimado e custo real por lote.
+- Custo por litro e por embalagem.
+- Fotografias, notas e documentos.
+- Histórico de lotes anteriores.
+- Exportação e importação de receitas em formatos documentados, quando aplicável.
+
+Todos os cálculos deverão possuir fórmulas documentadas, unidades explícitas, validações e testes. Diferencie estimativas de medições reais e permita ajustar parâmetros conforme os equipamentos e métodos utilizados.
+
+8. MÓDULO DE PRODUÇÃO PROFISSIONAL
+
+Implemente um sistema de gestão de produção cervejeira que possa crescer em complexidade.
+
+Funcionalidades:
+
+- Cadastro de produtos, receitas e fichas técnicas.
+- Planejamento de produção.
+- Ordens de produção.
+- Programação de brassagens.
+- Lotes e sublotes.
+- Consumo planejado e real de matérias-primas.
+- Etapas de produção configuráveis.
+- Controle de fermentadores, tanques e equipamentos.
+- Capacidade disponível e ocupação.
+- Registro de parâmetros por etapa.
+- Rendimentos, perdas e desvios.
+- Transferências entre tanques.
+- Misturas e divisão de lotes com rastreabilidade.
+- Maturação, filtração, carbonatação e envase.
+- Controle de barris, garrafas e latas.
+- Identificação de lotes de produtos acabados.
+- Planejamento de demanda e reposição.
+- Histórico completo da produção.
+- Comparação entre lotes planejados e executados.
+
+Implemente transições de status válidas, bloqueando operações incompatíveis com o estado atual de uma ordem ou lote.
+
+Permita configurar o fluxo produtivo de acordo com os processos de cada cervejaria, sem impor um único método de fabricação.
+
+9. MÓDULO DE QUALIDADE E RASTREABILIDADE
+
+Implemente:
+
+- Fichas de inspeção.
+- Registros de medições.
+- Limites e faixas de referência configuráveis.
+- Aprovação, reprovação e quarentena.
+- Tratamento de desvios.
+- Ações corretivas e preventivas.
+- Histórico de alterações.
+- Rastreabilidade dos insumos até os lotes de produtos acabados.
+- Rastreabilidade reversa de produtos até os fornecedores e lotes de origem.
+- Registro de limpeza e sanitização.
+- Controle de calibração, quando aplicável.
+- Anexos, laudos e documentos.
+- Consulta de lotes potencialmente afetados por um problema.
+- Relatórios para investigação e recolhimento de produtos.
+
+Registros de qualidade já finalizados não devem ser sobrescritos silenciosamente. Implemente correções auditáveis, justificativas e histórico de versões.
+
+Prepare a estrutura para procedimentos operacionais e requisitos regulatórios aplicáveis, sem afirmar conformidade legal antes de uma validação especializada.
+
+10. MÓDULO DE ESTOQUE, COMPRAS E FORNECEDORES
+
+Desenvolva:
+
+- Cadastro de insumos, ingredientes, equipamentos e embalagens.
+- Unidades de medida e conversões controladas.
+- Lotes de fornecedores.
+- Validade, armazenamento e condições de conservação, quando aplicáveis.
+- Saldo por local de estoque.
+- Entradas, saídas e transferências.
+- Reserva de estoque para ordens de produção.
+- Inventário e ajustes justificados.
+- Estoque mínimo e alertas de reposição.
+- Histórico de movimentações.
+- Custos médios e custos por lote, conforme método configurado.
+- Requisições de compra.
+- Cotações de fornecedores.
+- Pedidos de compra.
+- Recebimento parcial ou total.
+- Conferência de divergências.
+- Contas e compromissos relacionados às compras.
+- Avaliação de fornecedores.
+- Comparação de preços e prazos.
+
+Utilize um registro consistente de movimentações de estoque, com transações atômicas para evitar saldos incorretos em operações simultâneas.
+
+Não permita saldo negativo por padrão. Exceções deverão depender de permissões explícitas e deixar trilha de auditoria.
+
+11. CRM COMPLETO E GESTÃO COMERCIAL
+
+O CRM deverá ser um dos principais diferenciais da plataforma.
+
+Implemente:
+
+- Cadastro de leads, contatos, empresas e grupos empresariais.
+- Segmentação por perfil e potencial comercial.
+- Funil de vendas configurável.
+- Oportunidades e negócios.
+- Atividades, tarefas e lembretes.
+- Agenda de visitas comerciais.
+- Registro de ligações, reuniões e negociações.
+- Histórico de interações.
+- Propostas e orçamentos.
+- Tabelas de preços.
+- Descontos com limites de aprovação.
+- Pedidos de venda.
+- Gestão de representantes e comissões.
+- Metas por vendedor, região e período.
+- Motivos de perda de negócios.
+- Campanhas comerciais com consentimento e regras aplicáveis.
+- Pós-venda, suporte e relacionamento.
+- Segmentação e classificação de clientes.
+- Previsão de vendas.
+- Relatórios de conversão e desempenho.
+- Alertas de clientes inativos e oportunidades paradas.
+- Histórico de compras por cliente.
+- Regras de crédito e bloqueios configuráveis.
+
+O CRM deverá servir tanto para vender cervejas quanto para comercializar insumos, equipamentos e serviços destinados ao mercado cervejeiro.
+
+Não misture dados de clientes pertencentes a organizações diferentes. Compartilhamentos comerciais futuros deverão depender de autorização e regras explícitas.
+
+12. FINANCEIRO E RENTABILIDADE
+
+Desenvolva um módulo gerencial com:
+
+- Contas a pagar e receber.
+- Fluxo de caixa previsto e realizado.
+- Categorias financeiras.
+- Centros de custo.
+- Despesas fixas e variáveis.
+- Receitas por produto, cliente e canal.
+- Custos de matérias-primas.
+- Custos de produção e embalagem.
+- Custos de mão de obra e despesas indiretas configuráveis.
+- Custo por lote, litro e embalagem.
+- Margem bruta e contribuição.
+- Preço sugerido de venda.
+- Ponto de equilíbrio estimado.
+- Orçamento versus realizado.
+- Conciliação por importação de arquivos, quando viável.
+- Relatórios exportáveis.
+- Histórico de alterações financeiras.
+
+Separe gestão gerencial de contabilidade oficial. Não apresente estimativas como demonstrações contábeis ou apurações fiscais oficiais.
+
+13. DISTRIBUIDORES, REVENDEDORES E FABRICANTES
+
+Crie uma área B2B com:
+
+- Cadastro comercial de empresas.
+- Catálogo de insumos, equipamentos, acessórios e serviços.
+- Variações, unidades, embalagens e especificações.
+- Fotos e fichas técnicas.
+- Preços de varejo e atacado.
+- Tabelas por cliente ou segmento.
+- Quantidades mínimas de pedido.
+- Descontos por volume.
+- Estoque disponível e sob encomenda.
+- Prazo de entrega e regiões atendidas.
+- Solicitação e comparação de cotações.
+- Pedidos comerciais.
+- Reposição e compras recorrentes.
+- Condições comerciais configuráveis.
+- Gestão de vendedores e representantes.
+- Histórico de clientes.
+- Avaliações e atendimento.
+- Relatórios de vendas e rentabilidade.
+- Área restrita para clientes empresariais.
+- Integração futura com transportadoras e logística.
+
+Permita que fornecedores mantenham seus próprios catálogos e estoques sem acesso aos dados internos dos concorrentes.
+
+14. MARKETPLACE CERVEJEIRO
+
+Prepare uma evolução para um marketplace especializado.
+
+Funcionalidades futuras:
+
+- Busca de produtos e fornecedores.
+- Filtros por categoria, marca, especificação e região.
+- Vitrines comerciais.
+- Comparação de ofertas.
+- Cotações para múltiplos fornecedores.
+- Carrinho e pedidos.
+- Disponibilidade e prazo estimado.
+- Acompanhamento do pedido.
+- Comissões da plataforma.
+- Painel de vendedores.
+- Gestão de disputas e cancelamentos.
+- Regras de reembolso.
+- Avaliações verificadas.
+- Integração com pagamentos e repasses.
+- Emissão e integração de documentos fiscais, conforme o modelo operacional.
+- Política de privacidade e termos para vendedores e compradores.
+
+Antes de habilitar transações reais, valide o modelo de intermediação, as obrigações fiscais, os meios de pagamento e a responsabilidade de cada participante.
+
+Mantenha o marketplace desacoplado do núcleo de produção, para que possa ser lançado separadamente.
+
+15. PAINÉIS, INDICADORES E RELATÓRIOS
+
+Crie dashboards diferentes por perfil.
+
+Cervejeiro caseiro
+
+- Próximas brassagens.
+- Lotes em fermentação.
+- Receitas favoritas.
+- Custos e evolução das receitas.
+- Equipamentos e insumos disponíveis.
+
+Gestor de cervejaria
+
+- Produção planejada versus realizada.
+- Rendimento e perdas.
+- Ocupação de tanques.
+- Estoque crítico.
+- Lotes pendentes de qualidade.
+- Custo por litro.
+- Margens por produto.
+- Pedidos, faturamento gerencial e contas a receber.
+- Desempenho comercial.
+
+Distribuidor e revendedor
+
+- Vendas por período.
+- Produtos mais vendidos.
+- Estoque e necessidade de reposição.
+- Margem por categoria.
+- Pedidos pendentes.
+- Desempenho de representantes.
+- Clientes ativos e inativos.
+
+Administrador SaaS
+
+- Organizações cadastradas.
+- Usuários ativos.
+- Assinaturas e situação dos pagamentos.
+- Uso por módulo.
+- Limites e consumo de recursos.
+- Falhas de integração.
+- Solicitações de suporte.
+- Indicadores de retenção e cancelamento.
+
+Todos os indicadores devem ser calculados com base em dados persistidos, filtros corretos e regras de negócio documentadas. Não utilize números fixos para simular métricas reais.
+
+16. ASSINATURAS E MONETIZAÇÃO
+
+Implemente uma arquitetura de planos configuráveis, com possibilidade de combinar módulos e limites de utilização.
+
+Considere os seguintes perfis comerciais:
+
+- Gratuito: experimentação e uso caseiro limitado.
+- Entusiasta: receitas, lotes e gestão pessoal ampliada.
+- Profissional: produção, estoque, compras e qualidade.
+- Cervejaria: CRM, financeiro gerencial, produção e vendas integradas.
+- Distribuidor: catálogo, estoque, pedidos e CRM B2B.
+- Avançado: multiunidades, relatórios e integrações.
+- Empresarial: planos personalizados, suporte e requisitos específicos.
+
+Não fixe os preços sem pesquisa de mercado e validação com clientes reais.
+
+Crie recursos para:
+
+- Períodos de teste.
+- Ativação e cancelamento.
+- Limites por plano.
+- Controle de módulos habilitados.
+- Histórico de assinatura.
+- Registro de eventos de cobrança.
+- Tratamento de pagamentos recusados.
+- Período de tolerância configurável.
+- Atualização e rebaixamento de planos.
+- Portal de gerenciamento da assinatura.
+- Webhooks de pagamento autenticados.
+- Reconciliação de eventos e prevenção de processamento duplicado.
+
+O estado da assinatura não poderá depender exclusivamente de uma informação enviada pelo navegador. Use verificações no servidor e eventos confiáveis do provedor.
+
+17. DESIGN E EXPERIÊNCIA DO USUÁRIO
+
+Desenvolva uma interface moderna, profissional, clara e adequada ao setor cervejeiro.
+
+Requisitos:
+
+- Design responsivo para desktop, tablet e celular.
+- Navegação lateral organizada por módulos.
+- Dashboard personalizável por perfil.
+- Busca global.
+- Filtros e ordenação.
+- Tabelas com paginação.
+- Formulários com validação clara.
+- Estados de carregamento, vazio, sucesso e erro.
+- Confirmação para operações destrutivas.
+- Acessibilidade por teclado.
+- Contraste e tipografia adequados.
+- Mensagens em português do Brasil.
+- Formatação correta de datas, valores e unidades.
+- Identidade visual consistente.
+- Componentes reutilizáveis.
+- Atalhos para as tarefas frequentes.
+- Experiência simples para iniciantes e detalhada para profissionais.
+
+Evite interfaces poluídas. Exiba recursos avançados apenas quando fizerem sentido para o perfil, o plano e as permissões do usuário.
+
+18. MODELO DE DADOS
+
+Projete um modelo relacional consistente, com chaves primárias e estrangeiras, índices, restrições, relacionamentos e regras de integridade.
+
+Considere, entre outras, as seguintes entidades:
+
+- profiles
+- organizations
+- organization_members
+- roles
+- permissions
+- plans
+- subscriptions
+- feature_entitlements
+- audit_logs
+- products
+- product_categories
+- recipes
+- recipe_versions
+- ingredients
+- equipment
+- production_orders
+- batches
+- batch_steps
+- fermentation_readings
+- quality_checks
+- stock_locations
+- inventory_lots
+- inventory_movements
+- suppliers
+- purchase_orders
+- purchase_order_items
+- customers
+- contacts
+- leads
+- opportunities
+- sales_activities
+- quotes
+- sales_orders
+- sales_order_items
+- financial_accounts
+- financial_transactions
+- catalog_listings
+- marketplace_orders
+- notifications
+- attachments
+- integration_events
+
+Essa lista é uma referência inicial, não uma obrigação de criar tabelas vazias para tudo.
+
+Normalize os dados quando necessário e use estruturas de extensão apenas quando justificadas. Evite armazenar todo o domínio em campos JSON genéricos.
+
+Toda tabela que contenha dados privados de uma organização deverá ter um modelo explícito de propriedade e autorização.
+
+Utilize migrações SQL versionadas. Não faça alterações estruturais manuais que não possam ser reproduzidas em um ambiente novo.
+
+19. SEGURANÇA, PRIVACIDADE E CONFIABILIDADE
+
+Implemente:
+
+- Row Level Security em todas as tabelas expostas com dados protegidos.
+- Políticas de autorização testadas.
+- Validação no servidor.
+- Proteção de rotas e operações sensíveis.
+- Gestão segura de sessões.
+- Rate limiting nas operações vulneráveis.
+- Proteção contra abuso de autenticação.
+- Segredos em variáveis de ambiente.
+- Validação de arquivos enviados.
+- Limites de upload.
+- Logs sem credenciais ou dados pessoais desnecessários.
+- Auditoria de operações críticas.
+- Paginação e limites de consultas.
+- Proteção contra duplicação de requisições em operações financeiras.
+- Estratégia de backup e restauração.
+- Procedimentos de resposta a incidentes.
+- Política de retenção e exclusão de dados.
+
+Nunca exponha a chave service_role do Supabase ao navegador.
+
+Implemente os princípios da LGPD: finalidade, necessidade, transparência, controle de acesso, atendimento aos direitos dos titulares e proteção de dados desde a concepção.
+
+Não declare conformidade legal absoluta sem revisão jurídica e técnica.
+
+20. TESTES E QUALIDADE
+
+Implemente testes automatizados de acordo com o risco e a complexidade:
+
+- Testes unitários para cálculos cervejeiros e regras financeiras.
+- Testes de integração com banco de dados.
+- Testes de autorização e isolamento multiempresa.
+- Testes dos fluxos de autenticação.
+- Testes de estoque e transações concorrentes.
+- Testes dos fluxos de produção.
+- Testes de CRM e pedidos.
+- Testes de assinaturas e webhooks.
+- Testes de interface dos principais fluxos.
+- Testes ponta a ponta das jornadas essenciais.
+- Testes de migrações em banco limpo.
+- Verificação de tipos, lint e build.
+
+Crie dados de teste reproduzíveis. Não use informações pessoais reais em ambientes de desenvolvimento.
+
+Corrija erros encontrados antes de considerar a etapa concluída.
+
+21. DOCUMENTAÇÃO E ENTREGA TÉCNICA
+
+Mantenha no repositório:
+
+- README.md com instalação e execução.
+- Plano de arquitetura.
+- Descrição dos módulos.
+- Diagrama do modelo de dados.
+- Migrações SQL.
+- Instruções para configurar o Supabase.
+- Instruções de implantação.
+- Arquivo .env.example sem segredos.
+- Manual de testes.
+- Guia de criação do primeiro administrador.
+- Política de permissões.
+- Documentação das integrações.
+- Plano de backup e recuperação.
+- Changelog.
+- Registro de decisões técnicas.
+- Backlog de funcionalidades.
+- Relatório de limitações conhecidas.
+
+Nunca inclua credenciais reais nos arquivos versionados.
+
+22. ETAPAS OBRIGATÓRIAS DE EXECUÇÃO
+
+Etapa 1 — Descoberta e planejamento
+
+Inspecione o ambiente, valide as ferramentas, defina arquitetura, backlog, riscos e estrutura do projeto.
+
+Entrega: plano técnico e projeto inicial organizado.
+
+Etapa 2 — Fundação executável
+
+Implemente layout, navegação, autenticação, banco de dados, organizações, papéis, RLS e testes de isolamento.
+
+Entrega: aplicação acessível, com cadastro, login e dados isolados por organização.
+
+Etapa 3 — MVP cervejeiro
+
+Implemente receitas, ingredientes, equipamentos, lotes, brassagem, fermentação, estoque básico e custos estimados.
+
+Entrega: usuário consegue cadastrar uma receita, executar um lote e acompanhar sua evolução com dados persistentes.
+
+Etapa 4 — MVP profissional
+
+Implemente produção, compras, fornecedores, qualidade, rastreabilidade e relatórios essenciais.
+
+Entrega: uma pequena cervejaria consegue controlar um fluxo operacional básico de ponta a ponta.
+
+Etapa 5 — CRM e vendas
+
+Implemente clientes, leads, funil, atividades, propostas, pedidos e indicadores comerciais.
+
+Entrega: processo comercial utilizável e testado.
+
+Etapa 6 — Financeiro e gestão
+
+Implemente contas a pagar e receber, fluxo de caixa gerencial, custos e margens.
+
+Entrega: visão integrada de operação e rentabilidade.
+
+Etapa 7 — Fornecedores e comércio B2B
+
+Implemente catálogos, tabelas de preços, cotações, pedidos e painéis comerciais.
+
+Entrega: fornecedores e compradores conseguem executar fluxos comerciais autorizados.
+
+Etapa 8 — Monetização
+
+Implemente planos, limites, assinatura, pagamentos e webhooks, inicialmente em ambiente de testes.
+
+Entrega: ciclo de assinatura verificável antes de ativar cobranças reais.
+
+Etapa 9 — Preparação comercial
+
+Revise segurança, acessibilidade, desempenho, logs, backups, documentação, termos de uso, privacidade e suporte.
+
+Entrega: checklist de prontidão comercial, com pendências identificadas.
+
+Etapa 10 — Evolução empresarial
+
+Prepare integrações fiscais e contábeis, APIs, multiunidades, BI, automações, importação em massa, integrações industriais e escalabilidade.
+
+Entrega: arquitetura documentada e implementações priorizadas por demanda real.
+
+Não avance automaticamente para uma etapa que dependa de uma etapa anterior incompleta ou insegura.
+
+23. CRITÉRIOS DE ACEITAÇÃO
+
+Uma funcionalidade só estará concluída quando:
+
+1. O código estiver implementado.
+2. O banco de dados e as migrações estiverem atualizados.
+3. As permissões estiverem aplicadas e testadas.
+4. O fluxo puder ser executado pela interface.
+5. Os dados forem persistidos e recuperados corretamente.
+6. As validações e os erros estiverem tratados.
+7. Os testes relevantes forem executados.
+8. A documentação estiver atualizada.
+9. O build não apresentar erros impeditivos.
+10. As limitações remanescentes estiverem registradas.
+
+Uma implantação só estará concluída quando a URL real tiver sido verificada e os fluxos essenciais estiverem funcionando no ambiente implantado.
+
+Não confunda código escrito com funcionalidade validada.
+
+24. PRIMEIRA TAREFA DA IA
+
+Comece agora pela Etapa 1 e pela fundação da Etapa 2.
+
+Execute as seguintes ações:
+
+1. Examine o repositório e identifique as ferramentas realmente disponíveis.
+2. Liste as decisões técnicas necessárias e adote padrões seguros para as que não exigirem intervenção do usuário.
+3. Crie a estrutura inicial do projeto.
+4. Configure TypeScript, lint, formatação, scripts e verificações de build.
+5. Configure o acesso ao Supabase por variáveis de ambiente.
+6. Crie as primeiras migrações de usuários, organizações e associação de membros.
+7. Implemente autenticação e isolamento multiempresa com RLS.
+8. Crie a estrutura visual responsiva e o dashboard inicial.
+9. Implemente testes automatizados dos fluxos de autenticação e autorização.
+10. Execute as verificações disponíveis e corrija os erros.
+11. Documente como configurar, executar e implantar a aplicação.
+12. Registre o que foi efetivamente concluído e indique a próxima tarefa executável.
+
+Se precisar de credenciais de serviços externos, crie os pontos de integração e explique exatamente como configurá-las, sem inventar credenciais nem afirmar que uma integração foi ativada.
+
+Se não puder executar alguma ação por falta de acesso, identifique o bloqueio e forneça instruções precisas para resolvê-lo.
+
+25. MODO DE TRABALHO CONTÍNUO
+
+Depois de cada etapa:
+
+- Informe o que foi implementado.
+- Liste os arquivos e migrações relevantes.
+- Informe os testes executados e seus resultados reais.
+- Liste problemas encontrados e pendências.
+- Atualize o backlog e a documentação.
+- Apresente o próximo conjunto de tarefas com maior valor para o negócio.
+- Continue implementando quando o ambiente permitir, em vez de apenas recomendar o que deveria ser feito.
+
+Priorize uma plataforma funcional, segura, sustentável e comercializável. Construa primeiro o núcleo confiável e depois amplie a cobertura de módulos.
+
+A meta final é oferecer uma solução integrada para todo o ciclo cervejeiro, da receita à produção, da produção às vendas, das vendas ao financeiro e do fornecedor ao comprador, com arquitetura preparada para crescer conforme as necessidades reais dos clientes.
